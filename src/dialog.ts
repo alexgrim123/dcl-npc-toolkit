@@ -284,6 +284,10 @@ export function closeDialog(npc:Entity){
     clearNPC()
 }
 
+export function checkAddedLibFunction(num: number) {
+  return (num*2);
+}
+
 export function talk(npc:Entity, dialog:Dialog[], startIndex?:number | string, duration?:number){
     npcDataComponent.get(npc).introduced = true
     if(npcDialogComponent.has(npc)){

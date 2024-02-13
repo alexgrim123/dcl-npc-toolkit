@@ -13,7 +13,7 @@ import {
     openDialogWindow,
     closeDialogWindow
 } from "./npc";
-import { talk } from "./dialog";
+import { talk, checkAddedLibFunction } from "./dialog";
 import { Dialog, NPCPathType, NPCType } from "./types";
 import { NpcUtilsUi } from './ui'
 
@@ -39,7 +39,8 @@ export {
     createDialogWindow,
     openDialogWindow,
     closeDialogWindow,
-    NpcUtilsUi
+    NpcUtilsUi,
+    checkAddedLibFunction
 }
 
 export const debugLabel: string = 'NPC-Toolkit'
