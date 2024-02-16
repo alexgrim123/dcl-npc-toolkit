@@ -126,8 +126,8 @@ export let redButtonEdge = {
   atlasWidth: sourcesComponentsCoordinates.atlasWidth
 }
 
-let modalScale = 1
-let modelFontSizeScale = 1
+export let modalScale = 1
+export let modelFontSizeScale = 1
 let modalTextWrapScale = 1
 
 export function setupNPCUiScaling(inModalScale: number, inFontSize: number, inModalTextWrapScale: number) {
