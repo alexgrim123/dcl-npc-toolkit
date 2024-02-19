@@ -40,7 +40,7 @@ export const NpcUtilsInputUi = () => {
                     flexDirection: 'row'
                 }}
                 uiBackground={{
-                    texture: {src: "imgs/notification.png"},
+                    texture: {src: "https://i.ibb.co/8mcxBVm/notification.png"},
                     textureMode: 'stretch'
                 }}
             >
@@ -79,7 +79,7 @@ export const NpcUtilsInputUi = () => {
                             closeInput(true)
                         }}
                         uiBackground={{
-                            texture: {src: "imgs/closeButton.png"},
+                            texture: {src: "https://i.ibb.co/zfDpTtW/close-Button.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}
@@ -106,7 +106,7 @@ export const NpcUtilsInputUi = () => {
                         width: '85%'
                     }}
                     uiBackground={{
-                        texture: {src: "imgs/inputUi.png"},
+                        texture: {src: "https://i.ibb.co/5WkcjKT/inputUi.png"},
                         textureMode: 'stretch'
                     }}
 
@@ -137,7 +137,7 @@ export const NpcUtilsInputUi = () => {
                             closeInput(true);
                         }}
                         uiBackground={{
-                            texture: {src: "imgs/yesButton.png"},
+                            texture: {src: "https://i.ibb.co/RB5PNYj/yes-Button.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}
@@ -155,7 +155,7 @@ export const NpcUtilsInputUi = () => {
                         }}
 
                         uiBackground={{
-                            texture: {src: "imgs/noButton.png"},
+                            texture: {src: "https://i.ibb.co/fxmsqjv/noButton.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}

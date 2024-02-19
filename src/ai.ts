@@ -1,4 +1,4 @@
-import { AudioSource, AvatarAnchorPointType, AvatarAttach, Entity, engine } from "@dcl/sdk/ecs";
+import { AudioSource, AudioStream, AvatarAnchorPointType, AvatarAttach, Entity, engine } from "@dcl/sdk/ecs";
 import { Client, Room } from "colyseus.js"
 import { getUserData } from "~system/UserIdentity"
 import { createDialogWindow, openDialogWindow } from "./npc";
@@ -17,9 +17,9 @@ function enablePlayerSound(sound: string){
     let playerSoundEntity: Entity
     playerSoundEntity = engine.addEntity()
 
-    AudioSource.createOrReplace(playerSoundEntity,
+    AudioStream.createOrReplace(playerSoundEntity,
         {
-            audioClipUrl: sound,
+            url: sound,
             playing: false,
         })
 
@@ -27,11 +27,11 @@ function enablePlayerSound(sound: string){
         anchorPointId: AvatarAnchorPointType.AAPT_POSITION,
     })
 
-    AudioSource.getMutable(playerSoundEntity).volume = 4
-    AudioSource.getMutable(playerSoundEntity).playing = true
+    //AudioStream.getMutable(playerSoundEntity).volume = 4
+    AudioStream.getMutable(playerSoundEntity).playing = true
     utils.timers.setTimeout(() => {
         engine.removeEntity(playerSoundEntity)
-    }, 10 * 1000);
+    }, 100 * 1000);
 }
 
 export async function setCustomServerUrl(customURL: string) {
@@ -60,7 +60,8 @@ export async function initServerModel(npc: Entity, url: string = colyseusServerU
             npcId.forEach((value, key)=>{
                 if (value == msg.id) {
                     openDialogWindow(key,createAiDialogSequence(key,msg.answer));
-                    enablePlayerSound(`${colyseusServerURL}${msg.voiceUrl}`);
+                    if (msg.voiceEnabled)
+                        enablePlayerSound(`${colyseusServerURL}${msg.voiceUrl}`);
                 }
             })
         })
