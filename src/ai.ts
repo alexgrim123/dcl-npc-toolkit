@@ -8,6 +8,8 @@ import { invokeInput } from "./uiInput";
 export let connected: boolean = false;
 export let connectedRoom: Room;
 export let npcId = new Map<Entity, number>();
+export let npcRagMode = new Map<Entity, boolean>();
+
 let npcCounter = 0;
 let colyseusServerURL = "http://localhost:2574"
 
@@ -38,25 +40,24 @@ export async function setCustomServerUrl(customURL: string) {
     colyseusServerURL = customURL;
 }
 
-export async function initServerModel(npc: Entity, url: string = colyseusServerURL) {
+export async function initServerModel(npc: Entity, ragMode: boolean) {
     if (connectedRoom == undefined) {
-        const colyseusClient: Client = new Client(url);
+        const colyseusClient: Client = new Client(colyseusServerURL);
         const user = await getUserData({});
         while(!connected){
-            try{
+            try {
                 connectedRoom = await colyseusClient.joinOrCreate(`lobby_room`, {
                     user: user
                 });
                 console.log("CONNECTED", connectedRoom?.roomId);
                 connected = true;
-            }catch(error:any){
+            } catch(error:any) {
                 console.log("error connecting", error?.message);
                 connected = false;
             }
         }
 
         connectedRoom.onMessage("getAnswer",(msg)=>{
-            console.log("GOT ANSWER: ", msg);
             npcId.forEach((value, key)=>{
                 if (value == msg.id) {
                     openDialogWindow(key,createAiDialogSequence(key,msg.answer));
@@ -68,10 +69,15 @@ export async function initServerModel(npc: Entity, url: string = colyseusServerU
     }
 
     npcId.set(npc,npcCounter++);
+    npcRagMode.set(npc,ragMode);
 }
 
 export function npcAiTalk(npc: Entity, text: string) {
-    connectedRoom.send("getAnswer",{id: npcId.get(npc),text: text});
+    connectedRoom.send("getAnswer",{
+        id: npcId.get(npc),
+        text: text,
+        rag: npcRagMode.get(npc)
+    });
 }
 
 export function initAiDialog(npc: Entity) {

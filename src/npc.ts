@@ -22,7 +22,7 @@ import { addDialog, closeDialog, findDialogByName, npcDialogComponent, openDialo
 import { faceUserSystem, handleBubbletyping, handleDialogTyping, handlePathTimes, inputListenerSystem } from './systems'
 import { Dialog, FollowPathData, ImageData, NPCData, NPCPathType, NPCState, NPCType, TriggerData } from './types'
 import { darkTheme, lightTheme } from './ui'
-import { initServerModel } from './ai'
+import { initServerModel, setCustomServerUrl } from './ai'
 
 export const walkingTimers: Map<Entity, number> = new Map()
 export const npcDataComponent: Map<Entity, any> = new Map()
@@ -52,9 +52,11 @@ export function getData(npc: Entity) {
   return npcDataComponent.get(npc)
 }
 
-export function create(transform: any, data: NPCData) {
+export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "") {
+  if (serverUrl != "")
+    setCustomServerUrl(serverUrl);
   let npc = engine.addEntity()
-  initServerModel(npc);
+  initServerModel(npc,ragMode);
 
   let t: TransformType = {
     position: transform.position ? transform.position : Vector3.create(0, 0, 0),
