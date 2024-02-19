@@ -23,7 +23,7 @@ export const NpcUtilsInputUi = () => {
                 positionType: 'absolute',
                 width: getScaledSize(width),
                 height: getScaledSize(height),
-                position: {bottom: "10%", left: '50%'},
+                position: {bottom: "30%", left: '50%'},
                 margin: { top: -height / 2, left: -width / 2 },
                 display: isVisible ? 'flex' : 'none'
             }}
@@ -40,7 +40,7 @@ export const NpcUtilsInputUi = () => {
                     flexDirection: 'row'
                 }}
                 uiBackground={{
-                    texture: {src: "https://github.com/alexgrim123/randomTory/blob/master/notification.png?raw=true"},
+                    texture: {src: "imgs/notification.png"},
                     textureMode: 'stretch'
                 }}
             >
@@ -79,7 +79,7 @@ export const NpcUtilsInputUi = () => {
                             closeInput(true)
                         }}
                         uiBackground={{
-                            texture: {src: "https://github.com/alexgrim123/randomTory/blob/master/closeButton.png?raw=true"},
+                            texture: {src: "imgs/closeButton.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}
@@ -106,7 +106,7 @@ export const NpcUtilsInputUi = () => {
                         width: '85%'
                     }}
                     uiBackground={{
-                        texture: {src: "https://github.com/alexgrim123/randomTory/blob/master/inputUi.png?raw=true"},
+                        texture: {src: "imgs/inputUi.png"},
                         textureMode: 'stretch'
                     }}
 
@@ -137,7 +137,7 @@ export const NpcUtilsInputUi = () => {
                             closeInput(true);
                         }}
                         uiBackground={{
-                            texture: {src: "https://github.com/alexgrim123/randomTory/blob/master/yesButton.png?raw=true"},
+                            texture: {src: "imgs/yesButton.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}
@@ -155,7 +155,7 @@ export const NpcUtilsInputUi = () => {
                         }}
 
                         uiBackground={{
-                            texture: {src: "https://github.com/alexgrim123/randomTory/blob/master/noButton.png?raw=true"},
+                            texture: {src: "imgs/noButton.png"},
                             textureMode: 'stretch',
                             color: Color4.White()
                         }}
