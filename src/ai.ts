@@ -106,7 +106,7 @@ function createAiDialogSequence(npc: Entity, firstText: string = 'Hi there!') {
                         npcAiTalk(npc,input);
                     })
                 }},
-                {label: 'Listen!', goToDialog: 2},
+                {label: 'Exit!', goToDialog: 2},
             ]
         },
         {
