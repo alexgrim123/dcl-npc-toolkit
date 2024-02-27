@@ -1,8 +1,8 @@
 import { AudioSource, AudioStream, AvatarAnchorPointType, AvatarAttach, Entity, engine } from "@dcl/sdk/ecs";
 import { Client, Room } from "colyseus.js"
-import { getUserData } from "~system/UserIdentity"
 import { createDialogWindow, openDialogWindow } from "./npc";
 import { Dialog } from "./types";
+import { getUserData } from '~system/UserIdentity'
 import { invokeInput } from "./uiInput";
 
 export let connected: boolean = false;
@@ -15,7 +15,7 @@ let colyseusServerURL = "http://localhost:2574"
 
 import * as utils from '@dcl-sdk/utils'
 
-function enablePlayerSound(sound: string){
+function enablePlayerSound(sound: string) {
     let playerSoundEntity: Entity
     playerSoundEntity = engine.addEntity()
 
@@ -40,15 +40,23 @@ export async function setCustomServerUrl(customURL: string) {
     colyseusServerURL = customURL;
 }
 
-export async function initServerModel(npc: Entity, ragMode: boolean) {
+export async function initServerModel(npc: Entity, ragMode: boolean, roomName: string) {
     if (connectedRoom == undefined) {
         const colyseusClient: Client = new Client(colyseusServerURL);
-        const user = await getUserData({});
+        let user = await getUserData({});
         while(!connected){
             try {
-                connectedRoom = await colyseusClient.joinOrCreate(`lobby_room`, {
-                    user: user
-                });
+                const availableRooms = await colyseusClient.getAvailableRooms(roomName);
+                let roomExist = false
+                for (let room of availableRooms) {
+                    if (room.roomId == "primary") {
+                        roomExist = true
+                    }
+                }
+
+                connectedRoom = !roomExist ? await colyseusClient.create<any>(roomName, {user: user})
+                    : await colyseusClient.joinById<any>("primary", {user: user})
+
                 console.log("CONNECTED", connectedRoom?.roomId);
                 connected = true;
             } catch(error:any) {

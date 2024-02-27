@@ -52,11 +52,11 @@ export function getData(npc: Entity) {
   return npcDataComponent.get(npc)
 }
 
-export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "") {
+export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "", roomName: string = "lobby_room") {
   if (serverUrl != "")
     setCustomServerUrl(serverUrl);
   let npc = engine.addEntity()
-  initServerModel(npc,ragMode);
+  initServerModel(npc,ragMode,roomName);
 
   let t: TransformType = {
     position: transform.position ? transform.position : Vector3.create(0, 0, 0),
