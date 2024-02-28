@@ -88,6 +88,13 @@ export let myNPC = npc.create(
 
 Those are RagMode, server url and room name. This is designed to work with colyseus server. RagMode will mark this npc to use or not use Rag Chain System. Server url is a connection url for server and room name should specify the colyseus room name that is used on server side.
 
+You need to specify server arguments only for the first NPC you create, others will share it. Also you can skip these arguments and setup url and room name beforehand like this:
+
+```ts
+setCustomServerUrl(url);
+setCustomServerRoomName(room_name);
+```
+
 3. Add response on server side:
 
 Install llm_response_backend module on the server side and add onMessage that sends response to frontend:
