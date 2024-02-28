@@ -19,7 +19,8 @@ import {
     initServerModel,
     npcAiTalk,
     setCustomServerUrl,
-    initAiDialog
+    initAiDialog,
+    debugOff
 } from "./ai";
 import { talk } from "./dialog";
 import { Dialog, NPCPathType, NPCType } from "./types";
@@ -52,7 +53,8 @@ export {
     initServerModel,
     setCustomServerUrl,
     initAiDialog,
-    NpcUtilsInputUi
+    NpcUtilsInputUi,
+    debugOff
 }
 
 export const debugLabel: string = 'NPC-Toolkit'

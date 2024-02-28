@@ -22,7 +22,7 @@ import { addDialog, closeDialog, findDialogByName, npcDialogComponent, openDialo
 import { faceUserSystem, handleBubbletyping, handleDialogTyping, handlePathTimes, inputListenerSystem } from './systems'
 import { Dialog, FollowPathData, ImageData, NPCData, NPCPathType, NPCState, NPCType, TriggerData } from './types'
 import { darkTheme, lightTheme } from './ui'
-import { initServerModel, setCustomServerUrl } from './ai'
+import { initServerModel, setCustomServerRoomName, setCustomServerUrl } from './ai'
 
 export const walkingTimers: Map<Entity, number> = new Map()
 export const npcDataComponent: Map<Entity, any> = new Map()
@@ -52,11 +52,17 @@ export function getData(npc: Entity) {
   return npcDataComponent.get(npc)
 }
 
-export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "", roomName: string = "lobby_room") {
+export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "", roomName: string = "") {
+  // ragMode bool flags if Rag System is used on server for this particular NPC
+  // serverURL should be specified for the first NPC created (or with setCustomServerUrl() before any NPCs are created)
+  // if server uses room_id for llm room that is not "lobby_room" specify it in the first NPC (or with setCustomServerRoomName() before any NPCs are created)
   if (serverUrl != "")
     setCustomServerUrl(serverUrl);
+  if (roomName != "")
+    setCustomServerRoomName(roomName);
   let npc = engine.addEntity()
-  initServerModel(npc,ragMode,roomName);
+  // This function initiates server connection if it's first NPC and sets NPC into the map of ids and rag modes
+  initServerModel(npc,ragMode);
 
   let t: TransformType = {
     position: transform.position ? transform.position : Vector3.create(0, 0, 0),

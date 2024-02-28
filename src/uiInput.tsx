@@ -14,6 +14,7 @@ function getScaledSize(size: number): number {
     return size * modalScale
 }
 
+// This is UI element for inputing string prompts
 export const NpcUtilsInputUi = () => {
     const width = getScaledSize(realWidth(700))
     const height = getScaledSize(realHeight(284))
