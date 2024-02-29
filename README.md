@@ -97,7 +97,7 @@ setCustomServerRoomName(room_name);
 
 3. Add response on server side:
 
-Install llm_response_backend module on the server side and add onMessage that sends response to frontend:
+Install llm_response module on the server side and add onMessage that sends response to frontend:
 
 ```ts
 this.onMessage("getAnswer", async (client, msg) => {

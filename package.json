@@ -1,6 +1,6 @@
 {
   "name": "dcl-npc-toolkit-ai-version",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "A collection of tools for creating Non-Player-Characters (NPCs). These are capable of having conversations with the player, and play different animations. AI usage is added atop of it",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
