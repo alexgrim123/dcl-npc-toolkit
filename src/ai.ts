@@ -91,8 +91,12 @@ export async function initServerModel(npc: Entity, ragMode: boolean) {
                     // Creating dialog for npc
                     openDialogWindow(key,createAiDialogSequence(key,msg.answer));
                     // Playing voice file if voice is enabled on server
-                    if (msg.voiceEnabled)
-                        enablePlayerSound(`${colyseusServerURL}${msg.voiceUrl}`);
+                    if (msg.voiceEnabled) {
+                        if (msg.voiceUrl)
+                            enablePlayerSound(`${colyseusServerURL}${msg.voiceUrl}`);
+                        else if (msg.voiceFullUrl)
+                            enablePlayerSound(`${msg.voiceFullUrl}`)
+                    }
                 }
             })
         })
