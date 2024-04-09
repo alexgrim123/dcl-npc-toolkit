@@ -1,6 +1,6 @@
 {
   "name": "dcl-npc-toolkit-ai-version",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "description": "A collection of tools for creating Non-Player-Characters (NPCs). These are capable of having conversations with the player, and play different animations. AI usage is added atop of it",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/decentraland-scenes/dcl-npc-toolkit.git"
+    "url": "https://github.com/alexgrim123/dcl-npc-toolkit.git"
   },
   "keywords": [
     "decentraland",
@@ -22,9 +22,9 @@
   "author": "Decentraland",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/decentraland-scenes/dcl-npc-toolkit/issues"
+    "url": "https://github.com/alexgrim123/dcl-npc-toolkit/issues"
   },
-  "homepage": "https://github.com/decentraland-scenes/dcl-npc-toolkit#readme",
+  "homepage": "https://github.com/alexgrim123/dcl-npc-toolkit#readme",
   "devDependencies": {
     "@dcl-sdk/utils": "latest",
     "@dcl/sdk": "latest",

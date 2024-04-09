@@ -189,6 +189,7 @@ const editInputUI = () => {
                     placeholderColor={Color4.White()}
                     onSubmit={() => {
                         input_callback(current_input);
+                        closeInput(true);
                     }}
                     onChange={(x) => {
                         onEdit(x)
