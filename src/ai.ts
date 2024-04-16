@@ -14,6 +14,7 @@ export let npcId = new Map<Entity, number>();
 export let npcRagMode = new Map<Entity, boolean>();
 let npcCounter = 0;
 let colyseusServerURL = "http://localhost:2574";
+let serverFileURL = "http://localhost:2574";
 let colyseusRoom = "lobby_room";
 
 // call this function to remove logs
@@ -44,8 +45,12 @@ function enablePlayerSound(sound: string) {
 }
 
 // Call this function before creating NPC to set colyseus server url OR input url directly in create() function argument
-export async function setCustomServerUrl(customURL: string) {
+export async function setCustomServerUrl(customURL: string, customFileURL: string = "") {
     colyseusServerURL = customURL;
+    if (customFileURL == "")
+        serverFileURL = colyseusServerURL;
+    else
+        serverFileURL = customFileURL;
     if (debug_on) console.log("Custom server URL is set");
 }
 export async function setCustomServerRoomName(customRoom: string) {
@@ -93,7 +98,7 @@ export async function initServerModel(npc: Entity, ragMode: boolean) {
                     // Playing voice file if voice is enabled on server
                     if (msg.voiceEnabled) {
                         if (msg.voiceUrl)
-                            enablePlayerSound(`${colyseusServerURL}${msg.voiceUrl}`);
+                            enablePlayerSound(`${serverFileURL}${msg.voiceUrl}`);
                         else if (msg.voiceFullUrl)
                             enablePlayerSound(`${msg.voiceFullUrl}`)
                     }
