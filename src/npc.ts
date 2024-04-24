@@ -52,7 +52,7 @@ export function getData(npc: Entity) {
   return npcDataComponent.get(npc)
 }
 
-export function create(transform: any, data: NPCData, ragMode: boolean = false, serverUrl: string = "", roomName: string = "", serverFileUrl: string = "") {
+export function create(transform: any, data: NPCData, ragMode: boolean = false, configuredMode: boolean = false, serverUrl: string = "", roomName: string = "", serverFileUrl: string = "") {
   // ragMode bool flags if Rag System is used on server for this particular NPC
   // serverURL should be specified for the first NPC created (or with setCustomServerUrl() before any NPCs are created)
   // if server uses room_id for llm room that is not "lobby_room" specify it in the first NPC (or with setCustomServerRoomName() before any NPCs are created)
@@ -62,7 +62,7 @@ export function create(transform: any, data: NPCData, ragMode: boolean = false, 
     setCustomServerRoomName(roomName);
   let npc = engine.addEntity()
   // This function initiates server connection if it's first NPC and sets NPC into the map of ids and rag modes
-  initServerModel(npc,ragMode);
+  initServerModel(npc,ragMode, configuredMode);
 
   let t: TransformType = {
     position: transform.position ? transform.position : Vector3.create(0, 0, 0),

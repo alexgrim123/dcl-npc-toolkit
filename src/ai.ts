@@ -12,6 +12,8 @@ export let connected: boolean = false;
 export let connectedRoom: Room;
 export let npcId = new Map<Entity, number>();
 export let npcRagMode = new Map<Entity, boolean>();
+export let npcConfiguredMode = new Map<Entity, boolean>();
+
 let npcCounter = 0;
 let colyseusServerURL = "http://localhost:2574";
 let serverFileURL = "http://localhost:2574";
@@ -61,7 +63,7 @@ export async function setCustomServerRoomName(customRoom: string) {
 // Initiating server / adding new npc to the map
 // This function is called automatically when new NPC is created
 // When called for the first time it connects to colyseus server by specified url from setCustomServerUrl()
-export async function initServerModel(npc: Entity, ragMode: boolean) {
+export async function initServerModel(npc: Entity, ragMode: boolean, configuredMode: boolean) {
     if (connectedRoom == undefined) {
         const colyseusClient: Client = new Client(colyseusServerURL);
         let user = await getUserData({});
@@ -110,6 +112,7 @@ export async function initServerModel(npc: Entity, ragMode: boolean) {
     // Adding NPC to maps, including if Rag system is on/off for particular NPC
     npcId.set(npc,npcCounter++);
     npcRagMode.set(npc,ragMode);
+    npcConfiguredMode.set(npc,configuredMode);
 }
 
 // This function is called to send message to server, consisting of user prompt
@@ -117,7 +120,8 @@ export function npcAiTalk(npc: Entity, text: string) {
     connectedRoom.send("getAnswer",{
         id: npcId.get(npc),
         text: text,
-        rag: npcRagMode.get(npc)
+        rag: npcRagMode.get(npc),
+        configured: npcConfiguredMode.get(npc)
     });
 }
 

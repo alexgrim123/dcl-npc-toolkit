@@ -82,11 +82,11 @@ export let myNPC = npc.create(
 		onActivate: () => {
 			console.log('npc activated')
 		},
-	},true,"http://localhost:2574","llm_room"
+	},true,false,"http://localhost:2574","llm_room"
 )
 ```
 
-Those are RagMode, server url and room name. This is designed to work with colyseus server. RagMode will mark this npc to use or not use Rag Chain System. Server url is a connection url for server and room name should specify the colyseus room name that is used on server side.
+Those are RagMode, ConfiguredMode, server url and room name. This is designed to work with colyseus server. RagMode will mark this npc to use or not use Rag Chain System. Configured signals server to use configuration for initial system message on backend. Server url is a connection url for server and room name should specify the colyseus room name that is used on server side.
 
 You need to specify server arguments only for the first NPC you create, others will share it. Also you can skip these arguments and setup url and room name beforehand like this:
 
