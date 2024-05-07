@@ -26,7 +26,7 @@ import { talk } from "./dialog";
 import { Dialog, NPCPathType, NPCType } from "./types";
 import { NpcUtilsUi } from './ui'
 import { closeBubble, closeBubbleEndAll } from "./bubble";
-import { NpcUtilsInputUi } from "./uiInput";
+import { NpcUtilsInputUi, NpcUtilsLoadingUi } from "./uiInput";
 
 export {
     activate,
@@ -54,6 +54,7 @@ export {
     setCustomServerUrl,
     initAiDialog,
     NpcUtilsInputUi,
+    NpcUtilsLoadingUi,
     debugOff
 }
 

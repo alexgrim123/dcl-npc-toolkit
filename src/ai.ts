@@ -3,7 +3,7 @@ import { Client, Room } from "colyseus.js"
 import { openDialogWindow } from "./npc";
 import { Dialog } from "./types";
 import { getUserData } from '~system/UserIdentity'
-import { invokeInput } from "./uiInput";
+import { closeLoading, invokeInput, invokeLoading } from "./uiInput";
 import * as utils from '@dcl-sdk/utils'
 
 // connection variables, npc maps
@@ -92,6 +92,7 @@ export async function initServerModel(npc: Entity, ragMode: boolean, configuredM
 
         // adding onMessage listener to receive answers from llm server
         connectedRoom.onMessage("getAnswer",(msg)=>{
+            closeLoading();
             npcId.forEach((value, key)=>{
                 if (value == msg.id) {
                     if (debug_on) console.log("Received prompt response from server: ", msg);
@@ -142,6 +143,7 @@ function createAiDialogSequence(npc: Entity, firstText: string = 'Hi there!') {
             buttons: [
                 {label: 'Talk!', goToDialog: 3, triggeredActions: ()=>{
                     invokeInput("Hey!","Tell me something!",(input: string)=>{
+                        invokeLoading();
                         npcAiTalk(npc,input);
                     })
                 }},

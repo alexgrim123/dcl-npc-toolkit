@@ -229,3 +229,80 @@ export function invokeInput(title: string, text: string, callback: any, initial_
 function onEdit(param: string) {
     current_input = param;
 }
+
+
+export const NpcUtilsLoadingUi = () => {
+    const width = getScaledSize(realWidth(700))
+    const height = getScaledSize(realHeight(200))
+    return (
+        <UiEntity //Invisible Parent
+            uiTransform={{
+                positionType: 'absolute',
+                width: getScaledSize(width),
+                height: getScaledSize(height),
+                position: {bottom: "30%", left: '50%'},
+                margin: { top: -height / 2, left: -width / 2 },
+                display: isLoadingVisible ? 'flex' : 'none'
+            }}
+        >
+
+            <UiEntity //Dialog Holder
+                uiTransform={{
+                    width: '100%',
+                    height: '100%',
+                    justifyContent: 'space-around',
+                    alignItems: 'stretch',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    flexDirection: 'row'
+                }}
+                uiBackground={{
+                    texture: {src: "https://i.ibb.co/8mcxBVm/notification.png"},
+                    textureMode: 'stretch'
+                }}
+            >
+
+                <UiEntity //TOP
+                    uiTransform={{
+                        width: '100%',
+                        height: '96%',
+                        margin: {top: '2%'},
+                        justifyContent: 'center'
+                    }}
+                >
+
+                    <UiEntity
+                        uiTransform={{
+                            height: '100%',
+                            width: '100%',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Label
+                            value={`<b>LOADING RESPONSE...</b>`}
+                            fontSize={getScaledFontSize(36)}
+                        ></Label>
+
+                    </UiEntity>
+
+                </UiEntity>
+            </UiEntity>
+        </UiEntity>
+    )
+}
+
+let isLoadingVisible = false;
+
+function setLoadingVisibility(status: boolean): void {
+    isLoadingVisible = status
+}
+
+export function closeLoading(triggerWalkAway: boolean = true) {
+    if (isLoadingVisible == false) return
+    setLoadingVisibility(false)
+    if (!triggerWalkAway) return
+}
+
+export function invokeLoading() {
+    setLoadingVisibility(true)
+}

@@ -131,3 +131,13 @@ this.onMessage("getAnswer", async (client, msg) => {
 ```
 
 Main parts of it is the name of the message "getAnswer" on receiving and on sending back, so it will trigger in the NPC. Other parts may be changed for your desired task.
+
+4. Add UI parts to your UI
+
+Add the following UI components to your UI:
+
+```ts
+npcUI()
+NpcUtilsInputUi()
+NpcUtilsLoadingUi()
+```
